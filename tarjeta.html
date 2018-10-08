@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,59 +19,115 @@
             margin: 10px;
             overflow: auto;
         }
+        .area{
+            width: 190px;
+            height: 100px;
+        }
+        .button{
+            background-color: green;
+            color: white;
+
+        }
     </style>
 </head>
+
 <body>
     <button id="crearTarjeta">Crear Tarjeta</button>
     <input type="text" id="texto">
     <input type="color" name="" id="color">
     <div id="contenedor">
 
-            <!-- <div  id="tarjeta" class="tarjeta"></div> -->
+        <!-- <div  id="tarjeta" class="tarjeta"></div> -->
     </div>
-    
-    
+
+
     <script>
         // var tarjeta = document.getElementById("tarjeta");
         var contenedor = document.getElementById("contenedor");
         var texto = document.getElementById("texto");
         var boton = document.getElementById("crearTarjeta");
         var color = document.getElementById("color");
-        var i = 1;
-        boton.addEventListener('click',() => {
+        // var i = 1;
+        boton.addEventListener('click', () => {
             // console.log("Botón funcionando");
             var tarjeta = document.createElement('div');
-            var text_area = document.createElement("textarea");
-            tarjeta.appendChild(text_area);
-            
-            tarjeta.setAttribute("id","tarjeta_"+i);
-            tarjeta.addEventListener('click',() => {            
-            //   var text_area = document.createElement("textarea");
-            //   i = i + 1;             
-              
-              text_area.innerText = tarjeta.innerText;
-              text_area.style.backgroundColor = tarjeta.style.backgroundColor;
-            //   text_area.addEventListener('change',() => {
-            //       alert(tarjeta.innerText);
-            //       var tar = document.getElementById("tarjeta_"+i);
-            //       alert(tar.innerText);
-            //       tar.innerText = text_area.innerText;
-            //   });
-              
 
+
+            // tarjeta.setAttribute("id", "tarjeta_" + i);            
+
+            tarjeta.addEventListener('click', () => {
+                var hasChild = tarjeta.querySelector('.area');
+                var hasChildbutton = tarjeta.querySelector('.button');
+
+                if (hasChild == null) {
+                    var text_area = document.createElement('TEXTAREA');
+                    tarjeta.appendChild(text_area);
+                    text_area.classList.add("area");
+                    text_area.contentEditable = true;
+                }
+
+                if (hasChildbutton == null) {
+                    var guardar = document.createElement('button');
+                    tarjeta.appendChild(guardar);
+                    guardar.classList.add("button");
+                    guardar.textContent = "Guardar";
+                    // guardar.addEventListener('click',() => {
+                    //     alert("fire");
+                    //     // tarjeta.innerText = text_area.innerText;
+                    //     text_area.contentEditable = false; 
+                    // });                    
+                }
+
+                var text_t = document.querySelector('div.tarjeta').childNodes[0];
+                text_area.innerText = text_t.innerText;
+                guardar.addEventListener('click', (tarjeta) => {
+                    self.tarjeta.innerText = text_area.innerText;
+                    alert(text_area.innerText);
+
+
+                });
+
+                // guardar.style.visibility = 'hidden';
+                // text_area.style.visibility = 'hidden';
+
+                text_area.style.backgroundColor = tarjeta.style.backgroundColor;
+                // text_area.innerText = tarjeta.innerText;
+
+                // tarjeta.style.visibility = 'hidden';
+
+
+                //     //   var text_area = document.createElement("textarea");
+                //     //   i = i + 1;             
+
+                //     // text_area.style.display = "inline";
+                //     // text_area.innerText = tarjeta.innerText;
+                //     // // text_area.style.backgroundColor = tarjeta.style.backgroundColor;
+                //     // text_area.contentEditable = true;
+                //     // console.log(text_area, text_area.textContent);
+                //     // // tarjeta.style.display = "None";
+                //     //   text_area.addEventListener('change',() => {
+                //     //       alert(tarjeta.innerText);
+                //     //       var tar = document.getElementById("tarjeta_"+i);
+                //     //       alert(tar.innerText);
+                //     //       tar.innerText = text_area.innerText;
             });
+
+
+            // });
             tarjeta.classList.add('tarjeta');
             contenedor.appendChild(tarjeta);
             // console.log(texto.value);
             // var tarjeta = document.getElementById("tarjeta");
             tarjeta.innerText = texto.value;
             tarjeta.style.backgroundColor = color.value;
-            texto.value  = "";
-            texto.focus();         
+            texto.value = "";
+            texto.focus();
 
         });
-        
+
+
 
     </script>
 </body>
+
 </html>
